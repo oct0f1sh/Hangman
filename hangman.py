@@ -12,31 +12,14 @@ def load_word():
 
 
 def is_word_guessed(secret_word, letters_guessed):
-    '''
-    secretWord: string, the random word the user is trying to guess.  This is selected on line 9.
-    lettersGuessed: list of letters that have been guessed so far.
-    returns: boolean, True only if all the letters of secretWord are in lettersGuessed;
-      False otherwise
-    '''
-    # FILL IN YOUR CODE HERE...
     for i in secret_word:
-        if i in letters_guessed:
-            continue
-        else:
+        if i not in letters_guessed:
             return False
 
     return True
 
 
 def get_guessed_word(secret_word, letters_guessed):
-    '''
-    secretWord: string, the random word the user is trying to guess.  This is selected on line 9.
-    lettersGuessed: list of letters that have been guessed so far.
-    returns: string, of letters and underscores.  For letters in the word that the user has
-    guessed correctly, the string should contain the letter at the correct position.  For letters
-    in the word that the user has not yet guessed, shown an _ (underscore) instead.
-    '''
-    # FILL IN YOUR CODE HERE...
     lngth = len(secret_word)
     secret_word_guesses = []
     for i in range(0, lngth):
@@ -57,11 +40,6 @@ def get_guessed_word(secret_word, letters_guessed):
 
 
 def get_available_letters(letters_guessed):
-    '''
-    lettersGuessed: list of letters that have been guessed so far
-    returns: string, comprised of letters that represents what letters have not
-      yet been guessed.
-    '''
 
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -128,25 +106,8 @@ def print_hangman(number_of_guesses):
         print("     |     /\     ")
         print("     ========     ")
 
+
 def hangman(secret_word):
-    '''
-    secretWord: string, the secret word to guess.
-
-    Starts up a game of Hangman in the command line.
-
-    * At the start of the game, let the user know how many
-      letters the secretWord contains.
-
-    * Ask the user to guess one letter per round.
-
-    * The user should receive feedback immediately after each guess
-      about whether their guess appears in the computer's word.
-
-    * After each round, you should also display to the user the
-      partially guessed word so far, as well as letters that the
-      user has not yet guessed.
-    '''
-    # FILL IN YOUR CODE HERE...
     lngth = len(secret_word)
     print("The secret word contains " + str(lngth) + " letters.")
 
@@ -166,6 +127,7 @@ def hangman(secret_word):
 
         if 26 - len(get_available_letters(guessed_letters)) == 6:
             print("YOU LOSE")
+            print("The secret word was " + secret_word + ".")
             return
 
         input_letter = input("Guess a letter: ")
@@ -185,5 +147,4 @@ def hangman(secret_word):
     print("\nYou Win!")
     print("The secret word was \"" + secret_word + "\"")
 
-secret_word = load_word()
-hangman(secret_word)
+hangman(load_word())
